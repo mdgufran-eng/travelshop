@@ -2,7 +2,10 @@ services:
   - type: web
     name: travelshop
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
     startCommand: gunicorn travelshop.wsgi:application --log-file -
     envVars:
       - key: DJANGO_SETTINGS_MODULE
@@ -11,4 +14,6 @@ services:
         generateValue: true
       - key: DEBUG
         value: "False"
+      - key: ALLOWED_HOSTS
+        value: "*"
     autoDeploy: true
