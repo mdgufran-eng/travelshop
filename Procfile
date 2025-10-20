@@ -1,0 +1,1 @@
+web: gunicorn travelshop.wsgi:application --log-file -

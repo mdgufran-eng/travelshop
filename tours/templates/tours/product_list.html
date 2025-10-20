@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Experiences · Travel Shop{% endblock %}
+{% block content %}
+<h1>Experiences</h1>
+<div class="grid">
+  {% for p in products %}
+    <div class="card">
+      <h3>{{ p.name }}</h3>
+      <p class="muted">{{ p.description|default:"No description." }}</p>
+      <p><strong>₹{{ p.price_per_person }}</strong> per person · Capacity/day: {{ p.capacity_per_day }}</p>
+      <a class="btn" href="{% url 'tours:product_detail' p.pk %}">View & Book</a>
+    </div>
+  {% empty %}
+    <p>No products yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

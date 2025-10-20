@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Booking Success · Travel Shop{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>🎉 Booking confirmed!</h2>
+  {% if booking %}
+    <p>You booked <strong>{{ booking.product.name }}</strong> on <strong>{{ booking.date }}</strong> for <strong>{{ booking.num_pax }}</strong> pax.</p>
+    <p>We’ll email a receipt to <strong>{{ booking.customer_email }}</strong>.</p>
+  {% else %}
+    <p>Your booking has been confirmed.</p>
+  {% endif %}
+  <p><a class="btn" href="{% url 'tours:product_list' %}">Back to experiences</a></p>
+</div>
+{% endblock %}

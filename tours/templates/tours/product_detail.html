@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} · Travel Shop{% endblock %}
+{% block content %}
+<a href="{% url 'tours:product_list' %}">← Back to all</a>
+<div class="card" style="margin-top:12px">
+  <h1 style="margin-top:0">{{ product.name }}</h1>
+  <p class="muted">{{ product.description|default:"No description." }}</p>
+  <p><strong>₹{{ product.price_per_person }}</strong> per person · Capacity/day: {{ product.capacity_per_day }}</p>
+</div>
+
+<div class="card">
+  <h3>Book now</h3>
+  <form method="post">
+    {% csrf_token %}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div>
+        <label for="{{ form.customer_name.id_for_label }}">Name</label>
+        {{ form.customer_name }} {{ form.customer_name.errors }}
+      </div>
+      <div>
+        <label for="{{ form.customer_email.id_for_label }}">Email</label>
+        {{ form.customer_email }} {{ form.customer_email.errors }}
+      </div>
+      <div>
+        <label for="{{ form.date.id_for_label }}">Date</label>
+        {{ form.date }} {{ form.date.errors }}
+      </div>
+      <div>
+        <label for="{{ form.num_pax.id_for_label }}">Number of pax</label>
+        {{ form.num_pax }} {{ form.num_pax.errors }}
+      </div>
+    </div>
+    <div style="margin-top:12px"><button class="btn" type="submit">Confirm booking</button></div>
+  </form>
+</div>
+{% endblock %}
